@@ -1,0 +1,12 @@
+crawl:
+  handler: src/functions/crawl/handler.main
+  events:
+    - httpApi:
+        method: post
+        path: /crawl
+endJob:
+  handler: src/functions/endJob/handler.main
+  events:
+    - httpApi:
+        method: post
+        path: /endJob

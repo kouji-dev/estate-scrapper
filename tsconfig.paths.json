@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@functions/*": ["src/functions/*"],
+      "@functions": ["src/functions/index.ts"],
+      "@libs/*": ["src/libs/*"],
+      "@services/*": ["src/services/*"],
+      "@services": ["src/services/index"],
+      "@api/*": ["src/api/*"],
+      "@api": ["src/api/index"],
+      "@models/*": ["src/models/*"],
+      "@utils/*": ["src/utils/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@resources/*": ["resources/*"],
+      "@framework": ["framework/index.ts"]
+    }
+  }
+}

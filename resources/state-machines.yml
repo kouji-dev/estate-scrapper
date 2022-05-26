@@ -1,0 +1,43 @@
+x-state: &state
+  events:
+    - http:
+        path: start/danbolig
+        method: post
+        cors: true
+    - schedule:
+        rate: rate(1 minute)
+        enabled: true
+        input:
+          body:
+            source: DANBOLIG
+    definition:
+      StartAt: Crawling
+      States:
+        Crawling:
+          Type: Task
+          Resource:
+            Fn::GetAtt: [ crawl, Arn ]
+          Next: CheckResume
+        CheckResume:
+          Type: Choice
+          Choices:
+            - Variable: "$.input.body.resume"
+              BooleanEquals: true
+              Next: Crawling
+          Default: EndingJob
+        EndingJob:
+          Type: Task
+          Resource:
+            Fn::GetAtt: [ endJob, Arn ]
+          End: true
+DANBOLIG:
+  <<: *state
+NYBOLIG:
+  <<: *state
+  events:
+    - http:
+        path: start/danbolig
+    - schedule:
+        input:
+          body:
+            source: DANBOLIG
